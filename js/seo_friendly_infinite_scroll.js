@@ -30,7 +30,7 @@
 
 
         $("article").each(function (idx, el) {
-            if (isElementInViewport2(el)) {
+            if (isElementInViewport(el)) {
                 // update the URL hash
                 var viewableArticleID = parseInt($(el).attr('id').replace("post-", ""));
                 console.log(viewableArticleID);
@@ -74,39 +74,17 @@
         return false;
     }
 
-    function isElementInViewport (el) {
-        //special bonus for those using jQuery
-        if (typeof jQuery === "function" && el instanceof jQuery) {
-            el = el[0];
-        }
-        var rect = el.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /*or $(window).height() */
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth) /*or $(window).width() */
-        );
-    }
-
-    function isElementInViewport2(el) {
-        var top = el.offsetTop;
-        var left = el.offsetLeft;
-        var width = el.offsetWidth;
-        var height = el.offsetHeight;
-
-        while(el.offsetParent) {
-            el = el.offsetParent;
-            top += el.offsetTop;
-            left += el.offsetLeft;
-        }
+    function isElementInViewport(el){
 
         return (
-            top < (window.pageYOffset + window.innerHeight) &&
-            left < (window.pageXOffset + window.innerWidth) &&
-            (top + height) > window.pageYOffset &&
-            (left + width) > window.pageXOffset
-        );
+            $(el).offset().top < window.pageYOffset + $(window).height()/2 &&
+            $(el).offset().top + $(el).height() > window.pageYOffset + $(window).height()/2
+        )
+
     }
+
+
+
 
 
 })(jQuery);

@@ -55,7 +55,7 @@ class SEOFriendlyInfiniteScroll
         if ($all_posts->have_posts()) : while ($all_posts->have_posts()) : $all_posts->the_post();
 
             $all_posts_arr[] = $post->ID;
-            $all_posts_urls_arr[] = $post->guid;
+            $all_posts_urls_arr[] = get_permalink($post);
 
         endwhile; endif;
 
