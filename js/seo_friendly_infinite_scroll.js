@@ -3,6 +3,7 @@
     var current_post_id = parseInt(seo_friendly_infinite_scroll.current_post_id),
         all_posts = seo_friendly_infinite_scroll.all_posts_arr,
         all_posts_urls = seo_friendly_infinite_scroll.all_posts_urls_arr,
+        ga_id = seo_friendly_infinite_scroll.ga_id,
         $content = $(seo_friendly_infinite_scroll.content_css_selector), // The content Element posts are inserted to
         $pagination = $(seo_friendly_infinite_scroll.pagination_css_selector); // The wordpress default pagination
 
@@ -37,9 +38,10 @@
                 var currentViewableIdx = all_posts.indexOf(viewableArticleID);
                 console.log(currentViewableIdx);
                 if (window.history.pushState) {
-                    //var urlHash = $(el).find('.posted-on').children().attr('href');
                     var urlHash = all_posts_urls[currentViewableIdx];
+                    var urlPath = new URL(urlHash);
                     window.history.pushState(null, null, urlHash);
+                    gtag('config', ga_id, {'page_path': urlPath.pathname});
                 }
             }
         });

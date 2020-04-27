@@ -67,6 +67,7 @@ class SEOFriendlyInfiniteScroll
                 'current_post_id' => $curr_post_id,
                 'all_posts_arr' => $all_posts_arr,
                 'all_posts_urls_arr' => $all_posts_urls_arr,
+                'ga_id' => get_option($this->prefix('google_analytics_id')),
                 'load_more_str' => __('Load more news', $this->identifier),
                 'loading_str' => __('Loading...', $this->identifier),
                 'error_str' => __('An error occured. Could not load more posts.', $this->identifier),
