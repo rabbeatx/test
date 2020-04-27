@@ -17,15 +17,22 @@
             <tr>
                 <th><label for="<?php echo $this->prefix('pagination_css_selector')?>"><?php _e('Pagination CSS selector', $this->identifier) ?></label></th>
                 <td>
-                    <input name="<?php echo $this->prefix('pagination_css_selector')?>" id="<?php echo $this->prefix('pagination_css_selector')?>" type="text" value="<?php echo get_option($this->prefix('pagination_css_selector'), '.page-content') ?>" class="regular-text code">
-                    <p class="description"><?php _e('This is the HTML element which contains the site navigation/pagination.<br>If your page selector is in &lt;div class="my-pagination"&gt;&lt;/div&gt;, set this parameter to .my-pagination', $this->identifier) ?></p>
+                    <input name="<?php echo $this->prefix('pagination_css_selector')?>" id="<?php echo $this->prefix('pagination_css_selector')?>" type="text" value="<?php echo get_option($this->prefix('pagination_css_selector'), '.post-navigation') ?>" class="regular-text code">
+                    <p class="description"><?php _e('This is the HTML element which contains the site navigation/pagination.<br>If your page selector is in &lt;nav class="post-navigation"&gt;&lt;/nav&gt;, set this parameter to .post-navigation', $this->identifier) ?></p>
                 </td>
             </tr>
             <tr>
                 <th><label for="<?php echo $this->prefix('google_analytics_id')?>"><?php _e('Google Analytics ID', $this->identifier) ?></label></th>
                 <td>
                     <input name="<?php echo $this->prefix('google_analytics_id')?>" id="<?php echo $this->prefix('google_analytics_id')?>" type="text" value="<?php echo get_option($this->prefix('google_analytics_id'), '') ?>" class="regular-text code">
-                    <p class="description"><?php _e('This is the HTML element which contains the site navigation/pagination.<br>If your page selector is in &lt;div class="my-pagination"&gt;&lt;/div&gt;, set this parameter to .my-pagination', $this->identifier) ?></p>
+                    <p class="description"><?php _e('Google Analytics ID.', $this->identifier) ?></p>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="<?php echo $this->prefix('loop_path')?>"><?php _e('Path to loop file', $this->identifier) ?></label></th>
+                <td>
+                    <input name="<?php echo $this->prefix('loop_path')?>" id="<?php echo $this->prefix('loop_path')?>" type="text" value="<?php echo get_option($this->prefix('loop_path'), '') ?>" class="regular-text code">
+                    <p class="description"><?php _e('Path to loop file<br>Exmaple: template-parts/content', $this->identifier) ?></p>
                 </td>
             </tr>
             </tbody>

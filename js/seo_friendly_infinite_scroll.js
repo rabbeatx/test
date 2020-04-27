@@ -11,11 +11,13 @@
     var nextID = currID + 1;
 
     if(nextID < all_posts.length) {
-        // Remove the traditional navigation.
+        // Remove the traditional navigation if there are older posts.
         $pagination.remove();
     }
 
     $(window).scroll(function() {
+
+        //Load next article when scrolling reach the bottom
         if ($(window).scrollTop() == $(document).height() - $(window).height()) {
             if (nextID > all_posts.length) {
                 return false;
@@ -25,19 +27,18 @@
             nextID++;
         }
 
-
+        //Change URL in browser's address bar on scroll and trigger GA pageview
         $("article").each(function (idx, el) {
             if (isElementInViewport(el)) {
-                // update the URL hash
                 var viewableArticleID = parseInt($(el).attr('id').replace("post-", ""));
-                console.log(viewableArticleID);
                 var currentViewableIdx = all_posts.indexOf(viewableArticleID);
-                console.log(currentViewableIdx);
                 if (window.history.pushState) {
-                    var urlHash = all_posts_urls[currentViewableIdx];
-                    var urlPath = new URL(urlHash);
-                    window.history.pushState(null, null, urlHash);
-                    gtag('config', ga_id, {'page_path': urlPath.pathname});
+                    var fullURL = all_posts_urls[currentViewableIdx];
+                    if(fullURL) {
+                        var urlPath = new URL(fullURL);
+                        window.history.pushState(null, null, fullURL); //Change URL in browser's address bar
+                        gtag('config', ga_id, {'page_path': urlPath.pathname}); //Trigger GA pageview
+                    }
                 }
             }
         });

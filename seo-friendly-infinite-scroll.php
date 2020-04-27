@@ -94,7 +94,7 @@ class SEOFriendlyInfiniteScroll
         $wp_query = $alt_post_query;
         $post = $wp_query->post;
         setup_postdata($post);
-        get_template_part( 'template-parts/post/content', get_post_format() );
+        get_template_part( get_option($this->prefix('loop_path')), get_post_format() );
         wp_reset_postdata();
         exit;
     }
@@ -143,6 +143,7 @@ class SEOFriendlyInfiniteScroll
         register_setting($this->prefix('settings'), $this->prefix('content_css_selector'));
         register_setting($this->prefix('settings'), $this->prefix('pagination_css_selector'));
         register_setting($this->prefix('settings'), $this->prefix('google_analytics_id'));
+        register_setting($this->prefix('settings'), $this->prefix('loop_path'));
     }
 
     public function adminMenu()
