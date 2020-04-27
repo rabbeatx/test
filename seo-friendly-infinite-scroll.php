@@ -35,22 +35,25 @@ class SEOFriendlyInfiniteScroll
             return;
         }
 
-        // Enqueue JS and CSS
+        // Enqueue JS
         wp_enqueue_script(
             $this->identifier,
             plugin_dir_url(__FILE__) . 'js/' . $this->identifier . '.js',
             array('jquery'),
-            '1.0',
+            filemtime( plugin_dir_path(__FILE__) . 'js/' . $this->identifier . '.js' ), //Use file modification time in Unix timestamp as a version to prevent browser caching
             true
         );
 
-
+        //Get current post ID
         $curr_post_id = $post->ID;
+
+        //Get all posts
         $args = array('post_status' => 'publish', 'posts_per_page' => -1);
         $all_posts = New WP_Query($args);
+
+        //Create all posts IDs and permalinks arrays
         $all_posts_arr = array();
         $all_posts_urls_arr = array();
-
 
         if ($all_posts->have_posts()) : while ($all_posts->have_posts()) : $all_posts->the_post();
 
@@ -60,6 +63,7 @@ class SEOFriendlyInfiniteScroll
         endwhile; endif;
 
 
+        //Pass variables to JS
         wp_localize_script(
             $this->identifier,
             $this->identifier,
@@ -82,6 +86,7 @@ class SEOFriendlyInfiniteScroll
 
     }
 
+    //Load next article
     public function loadNextArticle(){
         global $post, $wp_query;
         $nextID = $_POST['id'];
@@ -94,6 +99,7 @@ class SEOFriendlyInfiniteScroll
         exit;
     }
 
+    //Add GA code snippet
     public function addGACode(){
         echo "\n";
         echo "<!-- Global site tag (gtag.js) - Google Analytics -->\n";

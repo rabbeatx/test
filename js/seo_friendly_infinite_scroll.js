@@ -7,10 +7,6 @@
         $content = $(seo_friendly_infinite_scroll.content_css_selector), // The content Element posts are inserted to
         $pagination = $(seo_friendly_infinite_scroll.pagination_css_selector); // The wordpress default pagination
 
-    console.log(current_post_id);
-    console.log(all_posts);
-    console.log(all_posts_urls);
-
     var currID = all_posts.indexOf(current_post_id);
     var nextID = currID + 1;
 
@@ -49,12 +45,9 @@
     });
 
     function loadArticle(nextID) {
-        //console.log('load article:' + nextID );
+
         // Are there more posts to load?
         if(nextID < all_posts.length) {
-
-            // Show that we're working.
-            //$(this).text(seo_friendly_infinite_scroll.loading_str);
 
             // Load more posts
             $.ajax({
@@ -84,9 +77,5 @@
         )
 
     }
-
-
-
-
 
 })(jQuery);
